@@ -56,12 +56,52 @@ app.get('/validarfecha/:anio/:mes/:dia', (req, res) => {
 
  app.get('/matematica/sumar', (req, res) => {
 
+    if(!(isNaN(parseInt(req.query.n1)) || parseInt(req.query.n2))){
      res.status(200).send(`La suma da ` + sumar(parseInt(req.query.n1), parseInt(req.query.n2)))
- })
+    }
+    else{
+        res.status(400).send(`Ingreso inválido`)
+
+    }
+})
 
  app.get('/matematica/multiplicar', (req, res) => {
 
+    if(!(isNaN(parseInt(req.query.n1)) || isNaN(parseInt(req.query.n2)))){
+
      res.status(200).send(`La multiplicación da ` + (multiplicar(parseInt(req.query.n1), parseInt(req.query.n2))))
+    }
+     else{
+        res.status(400).send(`Ingreso inválido`)
+
+    }
+})
+
+app.get('/matematica/restar', (req, res) => {
+    if(!(isNaN(parseInt(req.query.n1)) || isNaN(parseInt(req.query.n2)))){
+
+    res.status(200).send(`La resta da ` + (restar(parseInt(req.query.n1), parseInt(req.query.n2))))
+    }
+    else{
+        res.status(400).send(`Ingreso inválido`)
+
+    }
+})
+
+app.get('/matematica/dividir', (req, res) => {
+    if(!(isNaN(parseInt(req.query.n1)) || isNaN(parseInt(req.query.n2)))){
+
+        if (parseInt(req.query.n2) == 0){
+            res.status(400).send(`El divisor no puede ser cero`)
+        }
+        else{
+            res.status(200).send(`La división da ` + (dividir(parseInt(req.query.n1), parseInt(req.query.n2))))
+        }
+    }
+    else{
+        res.status(400).send(`Ingreso inválido`)
+
+    }
 })
 
 app.listen(port, () => {

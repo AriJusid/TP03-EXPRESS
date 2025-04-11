@@ -16,12 +16,7 @@ const multiplicar = (a, b) =>{
 
 function dividir(x,y){
     if(y != 0){
-        return x/y;
-    }
-    else{
-        console.log("No es posible hacer la división.")
-    }
-    
+        return x/y; }
 }
 
 export{PI, sumar, multiplicar, restar, dividir, array}
