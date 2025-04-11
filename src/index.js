@@ -104,6 +104,19 @@ app.get('/matematica/dividir', (req, res) => {
     }
 })
 
+app.get('/omdb/searchbypage', (req, res) => {
+    res.status(200).send(OMDBSearchByPage(req.query.search, req.query.p));
+})
+
+app.get('/omdb/searchcomplete', (req, res) => {
+    res.status(200).send(OMDBSearchComplete(req.query.texto));
+})
+
+app.get('/omdb/getbyomdbid', (req, res) => {
+    res.status(200).send(OMDBSearchComplete(req.query.imdbID));
+})
+
+
 app.listen(port, () => {
 
     console.log(`Listening on port ${port}`)
