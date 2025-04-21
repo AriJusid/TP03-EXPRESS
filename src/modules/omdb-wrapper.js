@@ -4,7 +4,7 @@ const APIKEY = "";
 const RESULTADOSCONSOLA = 10
 
 
-const OMDBSearchByPage = async (searchText, page = 1) => {
+const OMDBSearchByPage = async (searchText, page) => {
 
   let returnObject = {
 
@@ -17,7 +17,7 @@ const OMDBSearchByPage = async (searchText, page = 1) => {
     };
 
     try{
-    const requestString = `http://www.omdbapi.com/?apikey=${APIKEY}&s=cars&p=${page}`;
+    const requestString = `http://www.omdbapi.com/?apikey=${APIKEY}&s=${searchText}&p=${page}`;
     const apiResponse = await axios.get(requestString);
 
     if(apiResponse.data.Response === "True"){

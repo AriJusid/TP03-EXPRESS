@@ -39,17 +39,11 @@ app.get('/validarfecha/:anio/:mes/:dia', (req, res) => {
     var dia = req.params.dia
     var fechaIng = new Date(anio, mes, dia)
 
-    if(Number.isNaN(fechaIng)){
+    if(Number.isNaN(Date.parse(fechaIng))){
         res.status(400).send(`Fecha inválida`)
     }
     else{
-        if(Number.isNaN(fechaIng)){
             res.status(200).send(`Fecha válida`)
-        }
-        else{
-            res.status(400).send(`Fecha inválida`)
-        }
-
     }    
     
 })
