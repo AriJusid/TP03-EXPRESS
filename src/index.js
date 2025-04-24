@@ -146,8 +146,15 @@ app.post('/alumnos', (req, res) => {
 })
 
 app.delete('/alumnos', (req, res) => {
-    alumnosArray.reduce(new Alumno(req.body));
-    res.json(alumnosArray);
+    const posAlumno = alumnosArray.findIndex(Alumno => Alumno.DNI === pareInt(req.body));
+    if (alumnosArray[posAlumno] != null){
+        alumnosArray.splice(alumnosArray[posAlumno], 1);
+        res.status(200).send("Alumno borrado")
+    }
+    else{
+        res.status(404).send("DNI inexistente")
+    }
+
 })
 
 app.listen(port, () => {
