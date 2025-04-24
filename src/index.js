@@ -1,5 +1,3 @@
-import Alumno from "./models/alumno.js"
-
 import {sumar, restar, multiplicar, dividir} from "./modules/matematica.js"
 
 import {OMDBSearchByPage, OMDBSearchComplete, OMDBGetByImdbID} from "./modules/omdb-wrapper.js"
@@ -50,7 +48,7 @@ app.get('/validarfecha/:anio/:mes/:dia', (req, res) => {
 
  app.get('/matematica/sumar', (req, res) => {
 
-    if(!(isNaN(parseInt(req.query.n1)) || parseInt(req.query.n2))){
+    if((!isNaN(parseInt(req.query.n1)) || !isNaN(parseInt(req.query.n2)))){
      res.status(200).send(`La suma da ` + sumar(parseInt(req.query.n1), parseInt(req.query.n2)))
     }
     else{
