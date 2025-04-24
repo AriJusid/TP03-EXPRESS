@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const APIKEY = ""; 
+const APIKEY = "78296dac"; 
 const RESULTADOSCONSOLA = 10
 
 
@@ -18,20 +18,27 @@ const OMDBSearchByPage = async (searchText, page) => {
 
     try{
     const requestString = `http://www.omdbapi.com/?apikey=${APIKEY}&s=${searchText}&p=${page}`;
+    console.log(requestString)
+
     const apiResponse = await axios.get(requestString);
-
+    console.log(apiResponse.data)
     if(apiResponse.data.Response === "True"){
+        console.log("entró")
         returnObject.respuesta = true
-        returnObject.cantidadTotal = apiResponse.data.totalResults
+        returnObject.cantidadTotal = parseInt(apiResponse.data.totalResults)
         returnObject.datos = apiResponse.data.Search
-
     }
 
-    else{returnObject.respuesta = false}
+    else{
+        returnObject.respuesta = false
+        returnObject.datos = []
+    }
   
     }
     catch{
         console.log("error")
+         returnObject.respuesta = false;
+         returnObject.datos = [];
     }
     return returnObject;
 

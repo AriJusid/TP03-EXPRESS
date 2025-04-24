@@ -2,6 +2,8 @@ import {sumar, restar, multiplicar, dividir} from "./modules/matematica.js"
 
 import {OMDBSearchByPage, OMDBSearchComplete, OMDBGetByImdbID} from "./modules/omdb-wrapper.js"
 
+import Alumno from "./models/alumno.js";
+
 import express  from "express"; 
 
 import cors from "cors"; 
@@ -11,6 +13,13 @@ const app  = express();
 
 const port = 3000;
 
+const alumnosArray = [];
+
+alumnosArray.push(new Alumno("Esteban Dido"  , "22888444", 20));
+
+alumnosArray.push(new Alumno("Matias Queroso", "28946255", 51));
+
+alumnosArray.push(new Alumno("Elba Calao"    , "32623391", 18));
 
 app.use(cors());         
 
@@ -97,7 +106,7 @@ app.get('/matematica/dividir', (req, res) => {
 })
 
 app.get('/omdb/searchbypage', (req, res) => {
-    res.status(200).send(OMDBSearchByPage(req.query.search, req.query.p));
+    res.status(200).send(OMDBSearchByPage(req.query.search, req.query.p).datos);
 })
 
 app.get('/omdb/searchcomplete', (req, res) => {
@@ -108,10 +117,43 @@ app.get('/omdb/getbyomdbid', (req, res) => {
     res.status(200).send(OMDBSearchComplete(req.query.imdbID));
 })
 
+app.get('/alumnos', (req, res) => {
+    res.status(200).send(alumnosArray);
+})
+
+app.get('/alumnos/:dni', (req, res) => {
+
+    var alumnoBuscado = null
+
+    for (var i = 0; i < alumnosArray.length; i++){
+        if (alumnosArray[i].DNI == req.params.dni){
+            alumnoBuscado = alumnosArray[i]
+        }
+    }
+
+    if (alumnoBuscado == null){
+        res.status(404).send("DNI inexistente")
+    }
+
+    else{
+        res.status(200).send(alumnoBuscado);
+    }
+})
+
+app.post('/alumnos', (req, res) => {
+    alumnosArray.push(new Alumno(req.body));
+    res.json(alumnosArray);
+})
+
+app.delete('/alumnos', (req, res) => {
+    alumnosArray.reduce(new Alumno(req.body));
+    res.json(alumnosArray);
+})
 
 app.listen(port, () => {
 
     console.log(`Listening on port ${port}`)
 
 })
+
 
