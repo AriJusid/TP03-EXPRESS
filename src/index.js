@@ -105,16 +105,16 @@ app.get('/matematica/dividir', (req, res) => {
     }
 })
 
-app.get('/omdb/searchbypage', (req, res) => {
-    res.status(200).send(OMDBSearchByPage(req.query.search, req.query.p).datos);
+app.get('/omdb/searchbypage', async (req, res) => {
+    res.status(200).send(await OMDBSearchByPage(req.query.search, req.query.p));
 })
 
-app.get('/omdb/searchcomplete', (req, res) => {
-    res.status(200).send(OMDBSearchComplete(req.query.texto));
+app.get('/omdb/searchcomplete', async (req, res) => {
+    res.status(200).send(await OMDBSearchComplete(req.query.texto));
 })
 
-app.get('/omdb/getbyomdbid', (req, res) => {
-    res.status(200).send(OMDBSearchComplete(req.query.imdbID));
+app.get('/omdb/getbyomdbid', async (req, res) => {
+    res.status(200).send( await OMDBGetByImdbID(req.query.imdbID));
 })
 
 app.get('/alumnos', (req, res) => {

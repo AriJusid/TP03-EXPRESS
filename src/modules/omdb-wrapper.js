@@ -18,10 +18,8 @@ const OMDBSearchByPage = async (searchText, page) => {
 
     try{
     const requestString = `http://www.omdbapi.com/?apikey=${APIKEY}&s=${searchText}&p=${page}`;
-    console.log(requestString)
 
     const apiResponse = await axios.get(requestString);
-    console.log(apiResponse.data)
     if(apiResponse.data.Response === "True"){
         console.log("entró")
         returnObject.respuesta = true
@@ -107,7 +105,7 @@ const OMDBGetByImdbID = async (imdbID) => {
     try{
         const requestString = `http://www.omdbapi.com/?apikey=${APIKEY}&i=${imdbID}`;
         const apiResponse = await axios.get(requestString);
-    
+        console.log(apiResponse.data)
         if(apiResponse.data.Response === "True"){
             returnObject.respuesta = true
             returnObject.datos = apiResponse.data
