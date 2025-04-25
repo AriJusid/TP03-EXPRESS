@@ -146,8 +146,8 @@ app.post('/alumnos', (req, res) => {
 })
 
 app.delete('/alumnos', (req, res) => {
-    const posAlumno = alumnosArray.findIndex(Alumno => Alumno.DNI === pareInt(req.body));
-    if (alumnosArray[posAlumno] != null){
+    const posAlumno = alumnosArray.findIndex(Alumno => Alumno.DNI === req.body);
+    if (alumnosArray[posAlumno] != -1){
         alumnosArray.splice(alumnosArray[posAlumno], 1);
         res.status(200).send("Alumno borrado")
     }
